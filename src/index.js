@@ -24,7 +24,7 @@ const ImporvedHomePage = (props) => {
                         <a className="navbar-brand" href="/dashboard">
                             Vaccine Findrr
                         </a>
-                        <a href="/states">Go to states</a>
+                        {/* <a href="/states">Go to states</a> */}
 
                     </nav>
                 </div>
@@ -36,7 +36,7 @@ const ImporvedHomePage = (props) => {
                         <Switch>
 
                             <Route path="/">
-                                <ShowVaccines  />
+                                <Home  />
                             </Route>
                             
 
@@ -51,7 +51,21 @@ const ImporvedHomePage = (props) => {
     );
 };
 
+const Home = (props) => {
 
+
+    return (
+        <div className="row">
+            <div  className="col-3">
+                <ShowStates/>
+            </div>
+            <div className="col-9">
+                <ShowVaccines  /> 
+            </div>
+            
+        </div>
+    );
+};
 
 // ========================================
 
