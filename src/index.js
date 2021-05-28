@@ -55,14 +55,14 @@ const Home = (props) => {
 
 
     return (
-        <div className="row">
-            <div  className="col-3">
-                <ShowStates/>
+        <div>
+            {/* <div  className="col-3">
+               
             </div>
             <div className="col-9">
                 <ShowVaccines  /> 
-            </div>
-            
+            </div> */}
+             <ShowStates />
         </div>
     );
 };
