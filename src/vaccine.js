@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from 'react-router-dom'
+import {  useParams } from 'react-router-dom'
 import validator from 'validator'
 
 const ShowVaccines = (props) => {
@@ -14,12 +14,12 @@ const ShowVaccines = (props) => {
     const [loadingVaccines, setloadingVaccines] = useState(true);
     const [vaccineAvailable, setVaccineAvailable] = useState(false);
     const [vaccineCenter, setVaccineCenter] = useState(false);
-    let [totalVaccines, setTotalVaccines] = useState(0)
+    // let [totalVaccines, setTotalVaccines] = useState(0)
     const isEmpty = (obj) => {
         return Object.keys(obj).length === 0;
     }
     useEffect(() => {
-        setTotalVaccines(0)
+        // setTotalVaccines(0)
         if (props.district_id != "" || props.district_id != 0) {
 
             console.log("distruct id -======>>>>> ", props.district_id)
@@ -33,7 +33,7 @@ const ShowVaccines = (props) => {
             console.log(url)
             fetch(url, requestOptions)
                 .then((response) => response.json())
-                .then((data) => {
+                .then(async (data) => {
                     if ("error" in data) {
                         console.log(data);
                         alert(data["error"]);
@@ -46,24 +46,33 @@ const ShowVaccines = (props) => {
                         const myData = [].concat(obj)
                             .sort((a, b) => a.available_capacity_dose1 > b.available_capacity_dose1 ? -1 : 1)
                         console.log(typeof myData)
+                        setVaccines(myData)
                         if (isEmpty(myData)) {
                             console.log("Nooooooooooooooo")
                             setVaccineCenter(false)
                         }
-                        else {
+                        else 
+                        {
                             let currVaccines = 0
-                            vaccines.map((vaccine) => {
-                                currVaccines += vaccine.available_capacity_dose1
+                            myData.map((vaccine) => {
+                                // console.log(typeof vaccine.available_capacity_dose1)
+                                // console.log("currVaccines --->>> ",currVaccines)
+                                
+                                currVaccines = currVaccines+vaccine.available_capacity_dose1
                             })
+                            // for (var key in myData) {
+                            //     console.log(key + " -> " + vaccines[key]);
+                            // }
+                            // console.log("total vacciness --->>>> ",currVaccines)
                             if (currVaccines == 0) {
                                 setVaccineAvailable(false)
                             } else {
                                 setVaccineAvailable(true)
                             }
-                            setTotalVaccines(currVaccines)
+                            // setTotalVaccines(currVaccines)
                             setVaccineCenter(true)
                         }
-                        setVaccines(myData)
+                        
                         setloadingVaccines(false)
 
                     }
@@ -73,6 +82,32 @@ const ShowVaccines = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log("props.district_name --->>>>  ",props.district_name)
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email: email,
+                district_id: props.district_id,
+                district_name: props.district_name
+            }),
+        };
+        // console.log("testing")
+        let base_url = process.env.REACT_APP_URL;
+        let second_arg = "notifications";
+        let url = base_url + second_arg;
+        console.log(url)
+        fetch(url, requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                if ("error" in data) {
+                    console.log(data);
+                    alert(data["error"]);
+                } else {
+                    // props.toggleSignUp();
+                    console.log(data)
+                }
+            });
 
     }
     const validateEmail = (email) => {
@@ -99,14 +134,13 @@ const ShowVaccines = (props) => {
 
                         <div>
                             {vaccineAvailable ?
-                                <div> Total vaccines Available = {totalVaccines}</div>
+                                <div></div>
                                 :
                                 <form
 
                                     style={{ height: "auto", margin: "15px" }}
                                     onSubmit={handleSubmit}
                                 >
-                                    No Vaccine Available
 
                                     <input
                                         className="form-control login-signup"
@@ -127,8 +161,8 @@ const ShowVaccines = (props) => {
                                         value="Get Notified when slot available"
                                     />
                                 </form>
-
                             }
+
                         </div>
                         :
                         <div>No Vaccine Center found !!</div>

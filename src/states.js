@@ -10,6 +10,8 @@ const ShowStates = (props) => {
     const [state_id, setStateId] = useState(0);
     const [districts, setDistricts] = useState([]);
     const [district_id, setDistrict_id] = useState([]);
+    const [district_name, setDistrict_name] = useState("");
+    const [district_dict, setDistrict_dict] = useState({});
 
     const [loadingDistricts, setLoadingDistricts] = useState(true);
 
@@ -27,22 +29,22 @@ const ShowStates = (props) => {
             .then((response) => response.json())
             .then((data) => {
                 if ("error" in data) {
-                    console.log(data);
+                    // console.log(data);
                     alert(data["error"]);
                 } else {
-                    console.log("states ====== ")
-                    console.log(data["states"])
+                    // console.log("states ====== ")
+                    // console.log(data["states"])
                     setStates(data["states"])
                 }
             });
     }, []);
     useEffect(() => {
         if (state_id != 0) {
+
             const requestOptions = {
                 method: "GET",
                 headers: { "Content-Type": "application/json" }
             };
-            console.log("testing")
 
             let url = "https://cdn-api.co-vin.in/api/v2/admin/location/districts/" + state_id
             console.log(url)
@@ -53,8 +55,8 @@ const ShowStates = (props) => {
                         console.log(data);
                         alert(data["error"]);
                     } else {
-                        console.log("districts ====== ")
-                        console.log(data['districts'])
+                        // console.log("districts ====== ")
+                        // console.log(data['districts'])
                         setDistricts(data["districts"])
                         setLoadingDistricts(false)
                     }
@@ -64,6 +66,7 @@ const ShowStates = (props) => {
 
 
     const DisplayDistricts = districts.map((district) => {
+        district_dict[district.district_id] = district.district_name
         return (
             <option key={district.district_id} value={district.district_id}>{district.district_name}</option>
         );
@@ -90,9 +93,12 @@ const ShowStates = (props) => {
 
     };
 
-    const onChangedHandlerDistrict = (value) => {
+    const onChangedHandlerDistrict = async (e) => {
 
-        setDistrict_id(value)
+        setDistrict_id(e.target.value)
+        // console.log(district_id)
+        setDistrict_name(district_dict[e.target.value])
+        // const setDistrict_name()
 
     };
     return (
@@ -109,7 +115,7 @@ const ShowStates = (props) => {
                     {loadingDistricts ?
                         <div></div>
                         :
-                        <select onChange={(event) => onChangedHandlerDistrict(event.target.value)}>
+                        <select onChange={(event) => onChangedHandlerDistrict(event)}>
                             <option value={0}>Select your District</option>
                             {DisplayDistricts}
                         </select>
@@ -119,7 +125,7 @@ const ShowStates = (props) => {
                 </div>
             </div>
             <div className="col-8">
-            <ShowVaccines district_id={district_id} />
+            <ShowVaccines district_id={district_id} district_name={district_name}/>
             </div>
         </div>
     );

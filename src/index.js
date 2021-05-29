@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -7,9 +7,7 @@ import "./index.css";
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {ShowStates} from "./states"
-import {ShowDistricts} from "./districts"
-import {ShowVaccines} from "./vaccine"
-
+import {Notifications} from "./notifications"
 
 // const jwt = require("jsonwebtoken");
 
@@ -21,10 +19,10 @@ const ImporvedHomePage = (props) => {
             <div>
                 <div>
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                        <a className="navbar-brand" href="/dashboard">
+                        <a className="navbar-brand" href="/">
                             Vaccine Findrr
                         </a>
-                        {/* <a href="/states">Go to states</a> */}
+                        {/* <a href="/notifications">Notifications</a> */}
 
                     </nav>
                 </div>
@@ -35,11 +33,13 @@ const ImporvedHomePage = (props) => {
                     <div className="row ">
                         <Switch>
 
+                           
+                            {/* <Route path="/notifications">
+                                <Notifications  />
+                            </Route> */}
                             <Route path="/">
                                 <Home  />
                             </Route>
-                            
-
                         </Switch>
                     </div>
                 </div>
@@ -56,12 +56,7 @@ const Home = (props) => {
 
     return (
         <div>
-            {/* <div  className="col-3">
-               
-            </div>
-            <div className="col-9">
-                <ShowVaccines  /> 
-            </div> */}
+
              <ShowStates />
         </div>
     );
