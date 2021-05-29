@@ -104,10 +104,9 @@ const ShowStates = (props) => {
     return (
         <div className="row">
 
-            <div className="col-4">
-                Select State
-            <select onChange={(event) => onChangedHandler(event.target.value)}>
-                    <option value={0}>Select your State</option>
+            <div className="col-4" style={{"padding":"30px"}}>
+            <select onChange={(event) => onChangedHandler(event.target.value)} style={{"width":"80%"}}>
+                    <option value={0}>Select state</option>
                     {toDisplay2}
                 </select>
 
@@ -115,8 +114,8 @@ const ShowStates = (props) => {
                     {loadingDistricts ?
                         <div></div>
                         :
-                        <select onChange={(event) => onChangedHandlerDistrict(event)}>
-                            <option value={0}>Select your District</option>
+                        <select onChange={(event) => onChangedHandlerDistrict(event)} style={{"width":"80%"}} >
+                            <option value={0}>Select district</option>
                             {DisplayDistricts}
                         </select>
                     }
@@ -124,7 +123,7 @@ const ShowStates = (props) => {
 
                 </div>
             </div>
-            <div className="col-8">
+            <div className="col-8" >
             <ShowVaccines district_id={district_id} district_name={district_name}/>
             </div>
         </div>

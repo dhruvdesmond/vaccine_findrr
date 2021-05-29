@@ -20,7 +20,7 @@ const ImporvedHomePage = (props) => {
                 <div>
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
                         <a className="navbar-brand" href="/">
-                            Vaccine Findrr
+                            Vaccine Findrr (1st dose only)
                         </a>
                         {/* <a href="/notifications">Notifications</a> */}
 

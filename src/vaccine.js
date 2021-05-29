@@ -169,7 +169,7 @@ const ShowVaccines = (props) => {
                     }
                 </div>
             }
-            <table className="table">
+            <table className="table" style={{"width":"70%"}} >
                 <thead>
                     <tr>
                         <th scope="col">#</th>
