@@ -1,67 +1,38 @@
-import React from "react";
+import React from 'react';
 
-import ReactDOM from "react-dom";
-import "./index.css";
+import ReactDOM from 'react-dom';
+import './index.css';
 
-
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import {ShowStates} from "./states"
-import {Notifications} from "./notifications"
-
-// const jwt = require("jsonwebtoken");
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { ShowStates } from './states';
+import './index.css';
 
 const ImporvedHomePage = (props) => {
-
-
-    return (
-        <Router>
-            <div>
-                <div>
-                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                        <a className="navbar-brand" href="/">
-                            Vaccine Findrr (1st dose only)
-                        </a>
-                        {/* <a href="/notifications">Notifications</a> */}
-
-                    </nav>
-                </div>
-
-                <div className="container">
-                    
-                    
-                    <div className="row ">
-                        <Switch>
-
-                           
-                            {/* <Route path="/notifications">
-                                <Notifications  />
-                            </Route> */}
-                            <Route path="/">
-                                <Home  />
-                            </Route>
-                        </Switch>
-                    </div>
-                </div>
-
-                {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+      <div className='header'>Vaccine Findrr (1st dose only)</div>
+      <div className='container1'>
+        <div className='col'>
+          <Switch>
+            <Route path='/'>
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>
+  );
 };
 
 const Home = (props) => {
-
-
-    return (
-        <div>
-
-             <ShowStates />
-        </div>
-    );
+  return <ShowStates />;
 };
 
-// ========================================
-
-ReactDOM.render(<ImporvedHomePage />, document.getElementById("root"));
+ReactDOM.render(<ImporvedHomePage />, document.getElementById('root'));
