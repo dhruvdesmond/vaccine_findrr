@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import validator from 'validator';
-import './index.css'
+import moment from 'moment';
+import './index.css';
 
 const ShowVaccines = (props) => {
   // const district_id = props.state_id
-  const today_date = new Date(Date.now()).toLocaleString();
+  const today_date = moment().format('DD/MM/YYYY, h:mm:ss');
   console.log(useParams());
   // let { id } = useParams();
   const [vaccines, setVaccines] = useState([]);

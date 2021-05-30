@@ -76,7 +76,7 @@ const ShowStates = (props) => {
   const toDisplay = filtered.map((state) => {
     return (
       <div key={state.state_id}>
-        {state.state_id} ---->>>> {state.state_name}
+        {state.state_id} {state.state_name}
       </div>
     );
   });
@@ -94,9 +94,7 @@ const ShowStates = (props) => {
 
   const onChangedHandlerDistrict = (e) => {
     setDistrict_id(e.target.value);
-    // console.log(district_id)
     setDistrict_name(district_dict[e.target.value]);
-    // const setDistrict_name()
   };
   return (
     <div className='col'>
